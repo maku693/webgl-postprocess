@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>WebGL Particle</title>
+</head>
+<body>
+  <canvas id="canvas" width="256" height="256"></canvas>
+  <script id="vs" type="text/plain">
+    precision mediump float;
+
+    uniform mat4 uMVPMatrix;
+
+    attribute vec3 aPosition;
+
+    void main() {
+      gl_Position = uMVPMatrix * vec4(aPosition, 1.0);
+    }
+  </script>
+  <script id="fs" type="text/plain">
+    precision mediump float;
+
+    uniform vec4 uColor;
+
+    void main() {
+      gl_FragColor = uColor;
+    }
+  </script>
+  <script src="twgl-full.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
