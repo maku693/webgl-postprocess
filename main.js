@@ -41,6 +41,7 @@ const render = time => {
   gl.useProgram(flareProgramInfo.program);
   twgl.setBuffersAndAttributes(gl, flareProgramInfo, flareBufferInfo);
   twgl.setUniforms(flareProgramInfo, {
+    uEnableBlur: enable_blur.checked,
     uTexture: resultTexture,
     uTextureSize: [width, height]
   });

@@ -6,6 +6,7 @@
 </head>
 <body>
   <canvas id="canvas" width="256" height="256"></canvas>
+  <p><label><input id="enable_blur" type="checkbox" checked> Enable Blur</label></p>
   <script id="main_vs" type="text/plain">
     precision mediump float;
 
@@ -37,20 +38,23 @@
   <script id="flare_fs" type="text/plain">
     precision mediump float;
 
+    uniform bool uEnableBlur;
     uniform sampler2D uTexture;
     uniform vec2 uTextureSize;
 
     void main() {
       vec2 texCoord = gl_FragCoord.xy / uTextureSize;
       vec4 color = texture2D(uTexture, texCoord);
-      color += texture2D(uTexture, texCoord, 1.0);
-      color += texture2D(uTexture, texCoord, 2.0);
-      color += texture2D(uTexture, texCoord, 3.0);
-      color += texture2D(uTexture, texCoord, 4.0);
-      color += texture2D(uTexture, texCoord, 5.0);
-      color += texture2D(uTexture, texCoord, 6.0);
-      color += texture2D(uTexture, texCoord, 7.0);
-      color += texture2D(uTexture, texCoord, 8.0);
+      if (uEnableBlur) {
+        color += texture2D(uTexture, texCoord, 1.0);
+        color += texture2D(uTexture, texCoord, 2.0);
+        color += texture2D(uTexture, texCoord, 3.0);
+        color += texture2D(uTexture, texCoord, 4.0);
+        color += texture2D(uTexture, texCoord, 5.0);
+        color += texture2D(uTexture, texCoord, 6.0);
+        color += texture2D(uTexture, texCoord, 7.0);
+        color += texture2D(uTexture, texCoord, 8.0);
+      }
       gl_FragColor = color;
     }
   </script>
